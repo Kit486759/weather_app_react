@@ -5,7 +5,8 @@ import styled, { ThemeProvider } from 'styled-components';
 const theme = {
     font: "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif",
     highestColor: "red",
-    lowestColor: "blue"
+    lowestColor: "blue",
+    feelColor: "#f1bf99"
 }
 
 const StyleDivWrap = styled.div`
@@ -31,10 +32,11 @@ margin:0;
 
 const StyleP = styled.p`
 font-family:Arial, Helvetica, sans-serif;
-color:${(props) => props.high ? props.theme.highestColor :
-        props.low ? props.theme.lowestColor :
-            "black"};
-
+color:${(props) =>
+        props.high ? props.theme.highestColor :
+            props.low ? props.theme.lowestColor :
+                props.feel ? props.theme.feelColor :
+                    "black"};
 `
 
 export default function Current() {
@@ -54,15 +56,16 @@ export default function Current() {
                     <StyleUl>
                         <input placeholder="Search city..." onChange={(e) => searchInput(e)}></input>
                         <button onClick={() => searchSubmit(searchKey)}>Search</button>
+      
                         <StyleTitle>
                             {currentData.name},{currentData.sys.country}
                         </StyleTitle>
-                        <li><StyleP>temp{currentData.main.temp}</StyleP></li>
-                        <li><StyleP>feels_like{currentData.main.feels_like}</StyleP></li>
-                        <li><StyleP high>temp_max{currentData.main.temp_max}</StyleP></li>
-                        <li><StyleP low>temp_min{currentData.main.temp_min}</StyleP></li>
-                        <li><StyleP>humidity{currentData.main.humidity}</StyleP></li>
-                        <li><StyleP>pressure{currentData.main.pressure}</StyleP></li>
+                        <li><StyleP>temp: {currentData.main.temp}</StyleP></li>
+                        <li><StyleP feel>feels_like: {currentData.main.feels_like}</StyleP></li>
+                        <li><StyleP high>temp_max: {currentData.main.temp_max}</StyleP></li>
+                        <li><StyleP low>temp_min: {currentData.main.temp_min}</StyleP></li>
+                        <li><StyleP>humidity: {currentData.main.humidity}</StyleP></li>
+                        <li><StyleP>pressure: {currentData.main.pressure}</StyleP></li>
                         <li><StyleP>
                             <img src={`http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`} alt="weatherIcon" />
                         </StyleP></li>

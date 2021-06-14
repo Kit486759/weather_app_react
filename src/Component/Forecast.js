@@ -41,7 +41,7 @@ export default function Forecast() {
 
     }, [forecastData])
 
-    console.log(data)
+    // console.log(data)
     return (
         <StyleDivWrap>
             {data.map((data, index) => {
